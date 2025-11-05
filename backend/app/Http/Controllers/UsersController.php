@@ -164,6 +164,7 @@ class UsersController extends Controller
                 'phone' => 'nullable|string|max:15',
                 'address' => 'nullable|string|max:255',
                 'role' => 'nullable|in:admin,user,moderator',
+                'status' => 'required|in:active,inactive',
             ]);
 
             if (!empty($validated['password'])) {
@@ -200,6 +201,14 @@ class UsersController extends Controller
             return redirect()->back()
                 ->withErrors(['error' => 'Có lỗi xảy ra: ' . $e->getMessage()]);
         }
+    }
+
+    /**
+     * Delete user (alias for destroy method)
+     */
+    public function delete($id)
+    {
+        return $this->destroy($id);
     }
 
     /**

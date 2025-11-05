@@ -61,9 +61,38 @@ const UserTable = ({ initialData = null, statsData = null }) => {
       return;
     }
 
-    // Xóa từ state (hoặc có thể gọi API để xóa thật)
-    setUsers(users.filter(u => u.id !== user.id));
-    alert('Xóa người dùng thành công!');
+    try {
+      // Tạo form để gửi DELETE request
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = `/users/delete/${user.id}`;
+      form.style.display = 'none';
+
+      // Thêm CSRF token
+      const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+      if (csrfToken) {
+        const csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = '_token';
+        csrfInput.value = csrfToken;
+        form.appendChild(csrfInput);
+      }
+
+      // Thêm method spoofing cho DELETE
+      const methodInput = document.createElement('input');
+      methodInput.type = 'hidden';
+      methodInput.name = '_method';
+      methodInput.value = 'DELETE';
+      form.appendChild(methodInput);
+
+      // Thêm form vào body và submit
+      document.body.appendChild(form);
+      form.submit();
+
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      alert('Có lỗi xảy ra khi xóa người dùng!');
+    }
   };
 
   const handleAddUser = async (e) => {
@@ -207,15 +236,10 @@ const UserTable = ({ initialData = null, statsData = null }) => {
       variant: 'warning',
       icon: '✏️',
       onClick: (user) => {
-        window.location.href = `/admin/users/${user.id}/edit`;
+        window.location.href = `/users/edit/${user.id}`;
       }
     },
-    {
-      label: (user) => user.status === 'active' ? 'Khóa' : 'Kích hoạt',
-      variant: (user) => user.status === 'active' ? 'danger' : 'success',
-      icon: (user) => user.status === 'active' ? '🔒' : '✅',
-      onClick: handleToggleStatus
-    },
+    
     {
       label: 'Xóa',
       variant: 'danger',
