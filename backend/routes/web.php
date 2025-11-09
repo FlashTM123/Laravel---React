@@ -4,6 +4,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,6 +22,21 @@ Route::prefix('users')->group(function () {
     Route::get('/edit/{id}', [UsersController::class, 'edit'])->name('users.edit');
     Route::put('/update/{id}', [UsersController::class, 'update'])->name('users.update');
     Route::delete('/delete/{id}', [UsersController::class, 'delete'])->name('users.delete');
+});
+Route::prefix('customers')->group(function () {
+    Route::get('/', [CustomersController::class, 'index'])->name('customers.index');
+});
+
+// Simple JSON API for customers used by React table components
+Route::get('/api/customers', [CustomersController::class, 'apiIndex']);
+
+Route::prefix('categories')->group(function () {
+    Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
+    Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
+    // Accept PUT for API-style updates from the React modal
+    Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
+    // Optional: accept DELETE for form-based deletes
+    Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 });
 
 

@@ -40,42 +40,7 @@ class UsersController extends Controller
 
         } catch (\Exception $e) {
                         // Fallback data nếu database lỗi
-            $users = collect([
-                [
-                    'id' => 1,
-                    'name' => 'Nguyễn Văn An',
-                    'email' => 'nguyen.van.an@email.com',
-                    'phone' => '0901234567',
-                    'address' => '123 Đường ABC, Quận 1, TP.HCM',
-                    'role' => 'admin',
-                    'status' => 'active',
-                ],
-                [
-                    'id' => 2,
-                    'name' => 'Trần Thị Bình',
-                    'email' => 'tran.thi.binh@email.com',
-                    'phone' => '0907654321',
-                    'address' => '456 Đường XYZ, Quận 3, TP.HCM',
-                    'role' => 'user',
-                    'status' => 'active',
-                ],
-                [
-                    'id' => 3,
-                    'name' => 'Admin123',
-                    'email' => 'Admin@gmail.com',
-                    'phone' => '0123456678',
-                    'address' => 'Hà Nội',
-                    'role' => 'admin',
-                    'status' => 'inactive',
-                ]
-            ]);
-
-            $stats = [
-                'total_users' => 3,
-                'active_users' => 2,
-                'inactive_users' => 1,
-                'new_users_this_month' => 3,
-            ];
+            
         }
 
         return view('admins.users.index', compact('users', 'stats'));

@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import Header from "./Layouts/Header.jsx";
 import Sidebar from "./Layouts/Sidebar.jsx";
 import UserTable from "./Table/userTable.jsx";
+import TableApp from "./tableApp.jsx";
 
 // Mount header to its own root so Blade content is preserved
 const headerEl = document.getElementById('header-root');
@@ -21,6 +22,7 @@ if (userTableContainer) {
     const initialData = userTableContainer.getAttribute('data-initial-data');
     const statsData = userTableContainer.getAttribute('data-stats-data');
 
+    // Keep backward compatibility for users table container
     createRoot(userTableContainer).render(
         <UserTable initialData={initialData} statsData={statsData} />
     );
@@ -36,8 +38,9 @@ tableContainers.forEach(container => {
 
     if (tableType) {
         const root = createRoot(container);
+        // Use TableApp which will pick the correct table component by tableType
         root.render(
-           <UserTable initialData={initialData} statsData={statsData} />
+           <TableApp tableType={tableType} initialData={initialData} statsData={statsData} />
         );
     }
 })
