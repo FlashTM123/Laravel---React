@@ -2,6 +2,7 @@ import React from "react";
 import UserTable from "./Table/userTable";
 import CustomerTable from "./Table/customerTable";
 import CategoriesTable from "./Table/categoriesTable";
+import BrandTable from "./Table/brandTable";
 
 const TableApp = ({ tableType, ...props}) => {
     const renderTable = () => {
@@ -13,6 +14,8 @@ const TableApp = ({ tableType, ...props}) => {
                 return <CustomerTable {...props} />;
             case "categories":
                 return <CategoriesTable {...props} />;
+            case "brands":
+                return <BrandTable {...props} />;
         }
     };
 

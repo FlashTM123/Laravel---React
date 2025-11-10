@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
+use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
@@ -13,7 +14,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $brands = Brand::all();
+        return view('admins.brand.index', compact('brands'));
     }
 
     /**
@@ -29,7 +31,17 @@ class BrandController extends Controller
      */
     public function store(StoreBrandRequest $request)
     {
-        //
+        $data = $request->validated() ?? $request->only(['name']);
+
+        $brand = Brand::create([
+            'name' => $data['name'] ?? null,
+        ]);
+
+        if ($request->wantsJson() || $request->ajax() || str_contains($request->header('Accept', ''), 'application/json')) {
+            return response()->json($brand, 201);
+        }
+
+        return redirect()->route('brands.index')->with('success', 'Thêm thương hiệu thành công');
     }
 
     /**
@@ -53,7 +65,17 @@ class BrandController extends Controller
      */
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        //
+        $data = $request->validated() ?? $request->only(['name']);
+
+        $brand->update([
+            'name' => $data['name'] ?? $brand->name,
+        ]);
+
+        if ($request->wantsJson() || $request->ajax() || str_contains($request->header('Accept', ''), 'application/json')) {
+            return response()->json($brand);
+        }
+
+        return redirect()->route('brands.index')->with('success', 'Cập nhật thương hiệu thành công');
     }
 
     /**
@@ -61,6 +83,11 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();
+
+        flash()
+            ->options(['position' => 'bottom-center'])
+            ->success('Deleted brand successfully!');
+        return redirect()->route('brands.index');
     }
 }

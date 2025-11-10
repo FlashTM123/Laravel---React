@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 
-const Header = ({ brand = 'Admin Panel', onToggleSidebar }) => {
+const Header = ({ brand = 'Flash Tech Admin', onToggleSidebar }) => {
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const [userOpen, setUserOpen] = useState(false);
 	const [notifications, setNotifications] = useState(2); // placeholder
@@ -55,7 +55,7 @@ const Header = ({ brand = 'Admin Panel', onToggleSidebar }) => {
 						</button>
 
 						<a href="#" className="flex items-center space-x-3 ml-0">
-							<div className="h-11 w-11 rounded-lg bg-linear-to-r from-indigo-500 to-pink-500 flex items-center justify-center text-white font-extrabold text-lg ring-2 ring-white/20 transform transition-transform hover:-translate-y-1">A</div>
+							<div className="h-11 w-11 rounded-lg bg-linear-to-r from-indigo-500 to-pink-500 flex items-center justify-center text-white font-extrabold text-lg ring-2 ring-white/20 transform transition-transform hover:-translate-y-1">F</div>
 							<div>
 								<div className="text-xl font-extrabold leading-none tracking-tight">{brand} <span className="ml-2 inline-block text-xs font-semibold bg-white/20 text-white px-2 py-0.5 rounded">Pro</span></div>
 								<div className="text-xs text-white/80">Administration • Analytics</div>

@@ -23,7 +23,7 @@ const Sidebar = ({ active, counts = {}, theme = 'indigo' }) => {
 		{ key: 'customers', label: 'Quản lý khách hàng', href: '/customers', icon: 'customers', countKey: 'customers' },
 		{ key: 'products', label: 'Quản lý sản phẩm', href: '/Admins/Products', icon: 'box', countKey: 'products' },
 		{ key: 'categories', label: 'Quản lý danh mục', href: '/categories', icon: 'tag', countKey: 'categories' },
-		{ key: 'brands', label: 'Quản lý thương hiệu', href: '/Admins/Brands', icon: 'badge', countKey: 'brands' },
+		{ key: 'brands', label: 'Quản lý thương hiệu', href: '/brands', icon: 'badge', countKey: 'brands' },
 		{ key: 'orders', label: 'Quản lý đơn hàng', href: '/admin/orders', icon: 'order', countKey: 'orders' },
 	];
 

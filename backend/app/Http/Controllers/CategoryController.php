@@ -42,12 +42,17 @@ class CategoryController extends Controller
             'description' => $data['description'] ?? null,
         ]);
 
+        
         // If the client expects JSON (AJAX/modal), return JSON; otherwise redirect back with a success message
         if ($request->wantsJson() || $request->ajax() || str_contains($request->header('Accept', ''), 'application/json')) {
             return response()->json($category, 201);
         }
+       flash()
+            ->options(['position' => 'bottom-right'])
+            ->use('theme.facebook')
+            ->success('Your product has been created successfully!');
 
-        return redirect()->route('categories.index')->with('success', 'Thêm danh mục thành công');
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -92,6 +97,9 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return redirect()->route('categories.index')->with('success', 'Xóa danh mục thành công');
+             flash()
+            ->options(['position' => 'bottom-center'])
+            ->success('Deleted category successfully!');
+        return redirect()->route('categories.index');
     }
 }

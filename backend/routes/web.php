@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BrandController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,6 +38,13 @@ Route::prefix('categories')->group(function () {
     Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
     // Optional: accept DELETE for form-based deletes
     Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+});
+
+Route::prefix('brands')->group(function () {
+    Route::get('/', [BrandController::class, 'index'])->name('brands.index');
+    Route::post('/', [BrandController::class, 'store'])->name('brands.store');
+    Route::put('/{brand}', [BrandController::class, 'update'])->name('brands.update');
+    Route::delete('/{brand}', [BrandController::class, 'destroy'])->name('brands.destroy');
 });
 
 

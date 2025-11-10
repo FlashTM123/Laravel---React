@@ -3,8 +3,7 @@ import Table from "../TableLayouts/table";
 
 const UserTable = ({ initialData = null, statsData = null }) => {
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false); // Không cần loading vì data đã có sẵn
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false); 
   const [stats, setStats] = useState({});
   const [showAddModal, setShowAddModal] = useState(false);
   const [newUser, setNewUser] = useState({

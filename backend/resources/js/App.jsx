@@ -4,6 +4,7 @@ import Header from "./Layouts/Header.jsx";
 import Sidebar from "./Layouts/Sidebar.jsx";
 import UserTable from "./Table/userTable.jsx";
 import TableApp from "./tableApp.jsx";
+import ManageDashboard from "./Manage/manage.jsx";
 
 // Mount header to its own root so Blade content is preserved
 const headerEl = document.getElementById('header-root');
@@ -44,4 +45,13 @@ tableContainers.forEach(container => {
         );
     }
 })
+
+// Mount Manage Dashboard
+const manageDashboardContainer = document.getElementById('manage-dashboard-container');
+if (manageDashboardContainer) {
+    const statsData = manageDashboardContainer.getAttribute('data-stats-data');
+    createRoot(manageDashboardContainer).render(
+        <ManageDashboard statsData={statsData} />
+    );
+}
 
